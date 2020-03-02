@@ -2,11 +2,8 @@ language: java
 dist: trusty
 addons:
   sonarcloud:
-    organization: "simplon-alinee_ipi-java-350-ex" # the key of the org you chose at step #3
-    token:
-      secure: "MON_TOKEN" # encrypted value of your token
+    organization: "simplon-alinee"
+
 script:
-  # other script steps might be done before running the actual analysis
-  - sonar-scanner
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package org.jacoco:jacoco-maven-plugin:report
-  - if [ "$JAVA_HOME" = "/usr/lib/jvm/java-1.8.0-openjdk-amd64" ]; then mvn sonar:sonar; fi
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=simplon-alinee_ipi-java-350-ex  - if [ "$JAVA_HOME" = "/usr/lib/jvm/java-1.8.0-openjdk-amd64" ]; then mvn sonar:sonar; fi
