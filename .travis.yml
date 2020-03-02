@@ -1,1 +1,10 @@
 language: java
+dist: trusty
+addons:
+  sonarcloud:
+    organization: "simplon-alinee_ipi-java-350-ex" # the key of the org you chose at step #3
+    token:
+      secure: "MON_TOKEN" # encrypted value of your token
+script:
+  # other script steps might be done before running the actual analysis
+  - sonar-scanner
