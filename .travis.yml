@@ -1,4 +1,5 @@
 language: java
+
 addons:
   sonarcloud:
     organization: "simplon-alinee"
