@@ -1,3 +1,17 @@
 2020-03-13 09:29:35 - INFO  - Starting Java350Application on FR-L3356901 with PID 12748 (C:\Users\aline.elwert\tp1303\ipi-java-350-ex\target\classes started by aline.elwert in C:\Users\aline.elwert\tp1303\ipi-java-350-ex)
 2020-03-13 09:29:35 - INFO  - No active profile set, falling back to default profiles: default
 2020-03-13 09:29:40 - INFO  - Started Java350Application in 4.93 seconds (JVM running for 7.344)
+2020-03-13 10:08:06 - INFO  - Starting EmployeRepositoryTest on FR-L3356901 with PID 11888 (started by aline.elwert in C:\Users\aline.elwert\tp1303\ipi-java-350-ex)
+2020-03-13 10:08:06 - INFO  - No active profile set, falling back to default profiles: default
+2020-03-13 10:08:14 - INFO  - Started EmployeRepositoryTest in 10.226 seconds (JVM running for 14.882)
+2020-03-13 10:08:15 - INFO  - Starting EmployeServiceIntegrationTest on FR-L3356901 with PID 11888 (started by aline.elwert in C:\Users\aline.elwert\tp1303\ipi-java-350-ex)
+2020-03-13 10:08:15 - INFO  - No active profile set, falling back to default profiles: default
+2020-03-13 10:08:16 - INFO  - Started EmployeServiceIntegrationTest in 1.381 seconds (JVM running for 17.251)
+2020-03-13 10:08:16 - INFO  - Embauche de l'employé John Doe diplômé de BTS_IUT en tant que TECHNICIEN avec un taux d'activité de 1.0 
+2020-03-13 10:08:17 - INFO  - Embauche de l'employé John Doe diplômé de MASTER en tant que MANAGER avec un taux d'activité de 0.5 
+2020-03-13 10:08:17 - INFO  - Embauche de l'employé John Doe diplômé de MASTER en tant que MANAGER avec un taux d'activité de 0.5 
+2020-03-13 10:08:17 - ERROR - Limite des 100000 matricules atteinte !
+2020-03-13 10:08:17 - INFO  - Embauche de l'employé John Doe diplômé de MASTER en tant que MANAGER avec un taux d'activité de 0.5 
+2020-03-13 10:08:17 - INFO  - Embauche de l'employé John Doe diplômé de BTS_IUT en tant que TECHNICIEN avec un taux d'activité de 1.0 
+2020-03-13 10:08:17 - INFO  - Embauche de l'employé John Doe diplômé de MASTER en tant que MANAGER avec un taux d'activité de 0.5 
+2020-03-13 10:08:17 - ERROR - L'employé de matricule M00001 existe déjà en BDD

@@ -1,0 +1,2 @@
+13-03-2020 10:08:17.366 ERROR c.i.j.java350.service.EmployeService.embaucheEmploye - Limite des 100000 matricules atteinte !
+13-03-2020 10:08:17.394 ERROR c.i.j.java350.service.EmployeService.embaucheEmploye - L'employé de matricule M00001 existe déjà en BDD
