@@ -59,4 +59,35 @@ public class EmployeServiceIntegrationTest {
         Assertions.assertEquals(1825.46, employe.getSalaire().doubleValue());
     }
 
+    @Test
+    public void integrationCalculPerformanceEntre5Et20() throws EmployeException {
+        //Given
+        String matricule = "C12345";
+        Long caTraite = Long.valueOf(1100);
+        Long objectifCa = Long.valueOf(1000);
+        employeRepository.save(new Employe("Bon", "Jean", matricule, LocalDate.now(), Entreprise.SALAIRE_BASE, 1, 1.0));
+
+        //When
+        employeService.calculPerformanceCommercial(matricule, caTraite, objectifCa);
+
+        //Then
+        Employe employe = employeRepository.findByMatricule("C12345");
+        Assertions.assertEquals(3, employe.getPerformance().intValue());
+
+    }
+
+    @Test
+    public void testIntegrationAvgPerformance(){
+        //Given
+        Double avgPerformance = 4.00;
+        employeRepository.save(new Employe("Bon", "Jean", "C00001", LocalDate.now(), Entreprise.SALAIRE_BASE, 8, 1.0));
+        employeRepository.save(new Employe("Sonsec", "Sophie", "C00002", LocalDate.now(), Entreprise.SALAIRE_BASE, 1, 1.0));
+        employeRepository.save(new Employe("Age", "Carl", "C00003", LocalDate.now(), Entreprise.SALAIRE_BASE, 3, 1.0));
+        //When
+        Double performanceCalculated = employeRepository.avgPerformanceWhereMatriculeStartsWith("C");
+
+        //Then
+        Assertions.assertEquals(avgPerformance,performanceCalculated);
+    }
+
 }

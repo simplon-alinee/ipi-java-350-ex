@@ -2,6 +2,7 @@ package com.ipiecoles.java.java350.service;
 
 import com.ipiecoles.java.java350.exception.EmployeException;
 import com.ipiecoles.java.java350.model.Employe;
+import com.ipiecoles.java.java350.model.Entreprise;
 import com.ipiecoles.java.java350.model.NiveauEtude;
 import com.ipiecoles.java.java350.model.Poste;
 import com.ipiecoles.java.java350.repository.EmployeRepository;
@@ -33,7 +34,7 @@ public class EmployeServiceTest {
     EmployeRepository employeRepository;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         MockitoAnnotations.initMocks(this.getClass());
     }
 
@@ -112,7 +113,7 @@ public class EmployeServiceTest {
     }
 
     @Test
-    public void testEmbaucheEmployeManagerMiTempsMasterExistingEmploye(){
+    public void testEmbaucheEmployeManagerMiTempsMasterExistingEmploye() {
         //Given
         String nom = "Doe";
         String prenom = "John";
@@ -128,7 +129,7 @@ public class EmployeServiceTest {
     }
 
     @Test
-    public void testEmbaucheEmployeManagerMiTempsMaster99999(){
+    public void testEmbaucheEmployeManagerMiTempsMaster99999() {
         //Given
         String nom = "Doe";
         String prenom = "John";
@@ -141,4 +142,155 @@ public class EmployeServiceTest {
         EmployeException e = Assertions.assertThrows(EmployeException.class, () -> employeService.embaucheEmploye(nom, prenom, poste, niveauEtude, tempsPartiel));
         Assertions.assertEquals("Limite des 100000 matricules atteinte !", e.getMessage());
     }
+
+    //TODO
+    @Test
+    public void testCalculPerformanceCommercialInferieur20() throws EmployeException {
+        //Given
+        String matricule = "C00001";
+        Long caTraite = 500L;
+        Long objectifCa = 1000L;
+        Employe e = new Employe();
+        e.setNom("Doe")
+                .setPrenom("John")
+                .setMatricule(matricule)
+                .setDateEmbauche(LocalDate.now())
+                .setSalaire(Entreprise.SALAIRE_BASE)
+                .setPerformance(1)
+                .setTempsPartiel(1D);
+        when(employeRepository.findByMatricule("C00001")).thenReturn(e);
+        when(employeRepository.avgPerformanceWhereMatriculeStartsWith("C")).thenReturn(1D);
+        Integer newPerf = employeService.calculPerformanceCommercial(matricule, caTraite, objectifCa);
+        //When
+        e.setPerformance(newPerf);
+
+        //Then
+        Assertions.assertEquals(1, e.getPerformance().intValue());
+    }
+
+    @Test
+    public void testCalculPerformanceCommercialInferieur5à20() throws EmployeException {
+        //Given
+        String matricule = "C00001";
+        Long caTraite = 900L;
+        Long objectifCa = 1000L;
+        Employe e = new Employe();
+        e.setNom("Doe")
+                .setPrenom("John")
+                .setMatricule(matricule)
+                .setDateEmbauche(LocalDate.now())
+                .setSalaire(Entreprise.SALAIRE_BASE)
+                .setPerformance(1)
+                .setTempsPartiel(1D);
+        when(employeRepository.findByMatricule("C00001")).thenReturn(e);
+        when(employeRepository.avgPerformanceWhereMatriculeStartsWith("C")).thenReturn(1D);
+        Integer newPerf = employeService.calculPerformanceCommercial(matricule, caTraite, objectifCa);
+        //When
+        e.setPerformance(newPerf);
+
+        //Then
+        Assertions.assertEquals(1, e.getPerformance().intValue());
+    }
+
+    @Test
+    public void testCalculPerformanceCommercialEntreMoins5Plus5() throws EmployeException {
+        //Given
+        String matricule = "C00001";
+        Long caTraite = 1100L;
+        Long objectifCa = 1100L;
+        Employe e = new Employe();
+        e.setNom("Doe")
+                .setPrenom("John")
+                .setMatricule(matricule)
+                .setDateEmbauche(LocalDate.now())
+                .setSalaire(Entreprise.SALAIRE_BASE)
+                .setPerformance(1)
+                .setTempsPartiel(1D);
+        when(employeRepository.findByMatricule("C00001")).thenReturn(e);
+        when(employeRepository.avgPerformanceWhereMatriculeStartsWith("C")).thenReturn(1D);
+        Integer newPerf = employeService.calculPerformanceCommercial(matricule, caTraite, objectifCa);
+        //When
+        e.setPerformance(newPerf);
+
+        //Then
+        Assertions.assertEquals(1, e.getPerformance().intValue());
+    }
+
+    @Test
+    public void testCalculPerformanceCommercialSuperieur5à20() throws EmployeException {
+        //Given
+        String matricule = "C00001";
+        Long caTraite = 1100L;
+        Long objectifCa = 1000L;
+        Employe e = new Employe();
+        e.setNom("Doe")
+                .setPrenom("John")
+                .setMatricule(matricule)
+                .setDateEmbauche(LocalDate.now())
+                .setSalaire(Entreprise.SALAIRE_BASE)
+                .setPerformance(1)
+                .setTempsPartiel(1D);
+        when(employeRepository.findByMatricule("C00001")).thenReturn(e);
+        when(employeRepository.avgPerformanceWhereMatriculeStartsWith("C")).thenReturn(1D);
+        Integer newPerf = employeService.calculPerformanceCommercial(matricule, caTraite, objectifCa);
+        //When
+        e.setPerformance(newPerf);
+
+        //Then
+        Assertions.assertEquals(3, e.getPerformance().intValue());
+    }
+
+    @Test
+    public void testCalculPerformanceCommercialSuperieur20() throws EmployeException {
+        //Given
+        String matricule = "C00001";
+        Long caTraite = 1300L;
+        Long objectifCa = 1000L;
+        Employe e = new Employe();
+        e.setNom("Doe")
+                .setPrenom("John")
+                .setMatricule(matricule)
+                .setDateEmbauche(LocalDate.now())
+                .setSalaire(Entreprise.SALAIRE_BASE)
+                .setPerformance(1)
+                .setTempsPartiel(1D);
+        when(employeRepository.findByMatricule("C00001")).thenReturn(e);
+        when(employeRepository.avgPerformanceWhereMatriculeStartsWith("C")).thenReturn(1D);
+        Integer newPerf = employeService.calculPerformanceCommercial(matricule, caTraite, objectifCa);
+        //When
+        e.setPerformance(newPerf);
+
+        //Then
+        Assertions.assertEquals(6, e.getPerformance().intValue());
+    }
+
+    @Test
+    public void testCalculPerformanceCommercialAvecMatriculeNull() throws EmployeException {
+        org.assertj.core.api.Assertions.assertThatThrownBy(() -> {
+            employeService.calculPerformanceCommercial(null, 100L, 100L);
+        }).isInstanceOf(EmployeException.class).hasMessage("Le matricule ne peut être null et doit commencer par un C !");
+    }
+
+    @Test
+    public void testCalculPerformanceCommercialFauxMatricule() throws EmployeException {
+        String matricule = "C12345";
+        org.assertj.core.api.Assertions.assertThatThrownBy(() -> {
+            employeService.calculPerformanceCommercial("C12345", 100L, 100L);
+        }).isInstanceOf(EmployeException.class).hasMessage("Le matricule " + matricule + " n'existe pas !");
+    }
+
+    @Test
+    public void testCalculPerformanceCommercialNegatifCaTraite() {
+        org.assertj.core.api.Assertions.assertThatThrownBy(() -> {
+            employeService.calculPerformanceCommercial("C12345", -100L, 100L);
+        }).isInstanceOf(EmployeException.class).hasMessage("Le chiffre d'affaire traité ne peut être négatif ou null !");
+    }
+
+    @Test
+    public void testCalculPerformanceCommercialNegatifObjectifCa() {
+        org.assertj.core.api.Assertions.assertThatThrownBy(() -> {
+            employeService.calculPerformanceCommercial("C12345", 100L, -100L);
+        }).isInstanceOf(EmployeException.class).hasMessage("L'objectif de chiffre d'affaire ne peut être négatif ou null !");
+    }
+
 }

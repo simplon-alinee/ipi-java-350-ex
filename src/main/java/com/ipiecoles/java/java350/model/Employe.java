@@ -75,15 +75,16 @@ public class Employe {
     }
 
     public Integer getNbRtt(LocalDate d){
-        int i1 = d.isLeapYear() ? 365 : 366;
-        int var = 104;
+        int nbJ = d.isLeapYear() ? 366 : 365;
+        int nbJRepos = 104;
         switch (LocalDate.of(d.getYear(),1,1).getDayOfWeek()){
-            case THURSDAY: if(d.isLeapYear()) var =  var + 1; break;
-            case FRIDAY: if(d.isLeapYear()) var =  var + 2; else var =  var + 1;
-            case SATURDAY: var = var + 1; break;
+            case THURSDAY: if(d.isLeapYear()) nbJRepos =  nbJRepos + 1; break;
+            case FRIDAY: if(d.isLeapYear()) nbJRepos =  nbJRepos + 2; else nbJRepos =  nbJRepos + 1; break;
+            case SATURDAY: nbJRepos = nbJRepos + 1; break;
         }
-        int monInt = (int) Entreprise.joursFeries(d).stream().filter(localDate -> localDate.getDayOfWeek().getValue() <= DayOfWeek.FRIDAY.getValue()).count();
-        return (int) Math.ceil((i1 - Entreprise.NB_JOURS_MAX_FORFAIT - var - Entreprise.NB_CONGES_BASE - monInt) * tempsPartiel);
+        int nbJF = (int) Entreprise.joursFeries(d).stream().filter(localDate -> localDate.getDayOfWeek().getValue() <= DayOfWeek.FRIDAY.getValue()).count();
+        int nbJrtt = (int) Math.ceil((nbJ - Entreprise.NB_JOURS_MAX_FORFAIT - nbJRepos - Entreprise.NB_CONGES_BASE - nbJF) * tempsPartiel);
+        return nbJrtt;
     }
 
     /**
@@ -130,8 +131,9 @@ public class Employe {
         return id;
     }
 
-    public void setId(Long id) {
+    public Employe setId(Long id) {
         this.id = id;
+        return this;
     }
 
     /**
@@ -144,8 +146,9 @@ public class Employe {
     /**
      * @param nom the nom to set
      */
-    public void setNom(String nom) {
+    public Employe setNom(String nom) {
         this.nom = nom;
+        return this;
     }
 
     /**
@@ -158,8 +161,9 @@ public class Employe {
     /**
      * @param prenom the prenom to set
      */
-    public void setPrenom(String prenom) {
+    public Employe setPrenom(String prenom) {
         this.prenom = prenom;
+        return this;
     }
 
     /**
@@ -172,8 +176,9 @@ public class Employe {
     /**
      * @param matricule the matricule to set
      */
-    public void setMatricule(String matricule) {
+    public Employe setMatricule(String matricule) {
         this.matricule = matricule;
+        return this;
     }
 
     /**
@@ -186,8 +191,9 @@ public class Employe {
     /**
      * @param dateEmbauche the dateEmbauche to set
      */
-    public void setDateEmbauche(LocalDate dateEmbauche) {
+    public Employe setDateEmbauche(LocalDate dateEmbauche) {
         this.dateEmbauche = dateEmbauche;
+        return this;
     }
 
     /**
@@ -200,24 +206,27 @@ public class Employe {
     /**
      * @param salaire the salaire to set
      */
-    public void setSalaire(Double salaire) {
+    public Employe setSalaire(Double salaire) {
         this.salaire = salaire;
+        return this;
     }
 
     public Integer getPerformance() {
         return performance;
     }
 
-    public void setPerformance(Integer performance) {
+    public Employe setPerformance(Integer performance) {
         this.performance = performance;
+        return this;
     }
 
     public Double getTempsPartiel() {
         return tempsPartiel;
     }
 
-    public void setTempsPartiel(Double tempsPartiel) {
+    public Employe setTempsPartiel(Double tempsPartiel) {
         this.tempsPartiel = tempsPartiel;
+        return this;
     }
 
     @Override

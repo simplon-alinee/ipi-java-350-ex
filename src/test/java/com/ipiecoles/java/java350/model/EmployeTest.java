@@ -86,8 +86,9 @@ public class EmployeTest {
     }
 
     /**
-     * EXO 1
+     * EXO 1 methode augmenterSalaire : class Employe
      */
+    // test avec une augmentation de salaire de 10% sur 1000€
     @Test
     public void getSalaireAugmenté() {
         // Given
@@ -98,5 +99,43 @@ public class EmployeTest {
         //Then
         Assertions.assertEquals(1100D, salaireAugmenté);
     }
+
+    // test avec une augmentation de salaire de 0%
+    @Test
+    public void getSalaireAugmentéPourcentageNul(){
+        //Given
+        Employe employe = new Employe();
+        employe.setSalaire(1200D);
+        //When
+        Double salaireAugmenté = employe.augmenterSalaire(0D, employe.getSalaire());
+        //Then
+        Assertions.assertEquals(1200D,salaireAugmenté);
+    }
+
+    /**
+     * EXO 2 méthode getNbRtt : class Employe
+     */
+    @ParameterizedTest
+    @CsvSource({
+            "2019-01-01, 1, 8",
+            "2021-01-01, 1, 10",
+            "2022-01-01, 1, 10",
+            "2032-01-01, 1, 11",
+    })
+    public void getNbRtt(LocalDate date, Double tempsPartiel, Integer nbRtt){
+        //Given
+        Employe employe = new Employe("Bon", "Jean", "T00001", LocalDate.now(), 1000d, 1, tempsPartiel);
+
+        //When
+        //utilise la méthode pour calculer le nombre de rtt d'après la date (8j pour 2019)
+        Integer calcRTT = employe.getNbRtt(date);
+
+        //Then
+        //Verifie que le nombre de rtt passé en paramètre est égal à celui calculé par la méthode getNbRtt
+        Assertions.assertEquals(nbRtt,calcRTT);
+
+    }
+
+
 
 }
