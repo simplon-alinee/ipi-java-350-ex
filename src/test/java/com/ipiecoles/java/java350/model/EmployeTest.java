@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class EmployeTest {
 
     @Test
-    public void getNombreAnneeAncienneteNow(){
+    public void getNombreAnneeAncienneteNow() {
         //Given
         Employe e = new Employe();
         e.setDateEmbauche(LocalDate.now());
@@ -23,7 +23,7 @@ public class EmployeTest {
     }
 
     @Test
-    public void getNombreAnneeAncienneteNminus2(){
+    public void getNombreAnneeAncienneteNminus2() {
         //Given
         Employe e = new Employe();
         e.setDateEmbauche(LocalDate.now().minusYears(2L));
@@ -36,7 +36,7 @@ public class EmployeTest {
     }
 
     @Test
-    public void getNombreAnneeAncienneteNull(){
+    public void getNombreAnneeAncienneteNull() {
         //Given
         Employe e = new Employe();
         e.setDateEmbauche(null);
@@ -49,7 +49,7 @@ public class EmployeTest {
     }
 
     @Test
-    public void getNombreAnneeAncienneteNplus2(){
+    public void getNombreAnneeAncienneteNplus2() {
         //Given
         Employe e = new Employe();
         e.setDateEmbauche(LocalDate.now().plusYears(2L));
@@ -73,7 +73,7 @@ public class EmployeTest {
             "2, 'M12345', 0, 1.0, 1700.0",
             "2, 'M12345', 8, 1.0, 2500.0"
     })
-    public void getPrimeAnnuelle(Integer performance, String matricule, Long nbYearsAnciennete, Double tempsPartiel, Double primeAnnuelle){
+    public void getPrimeAnnuelle(Integer performance, String matricule, Long nbYearsAnciennete, Double tempsPartiel, Double primeAnnuelle) {
         //Given
         Employe employe = new Employe("Doe", "John", matricule, LocalDate.now().minusYears(nbYearsAnciennete), Entreprise.SALAIRE_BASE, performance, tempsPartiel);
 
@@ -83,6 +83,20 @@ public class EmployeTest {
         //Then
         Assertions.assertEquals(primeAnnuelle, prime);
 
+    }
+
+    /**
+     * EXO 1
+     */
+    @Test
+    public void getSalaireAugmenté() {
+        // Given
+        Employe employe = new Employe();
+        employe.setSalaire(1000D);
+        // When
+        Double salaireAugmenté = employe.augmenterSalaire(10D, employe.getSalaire());
+        //Then
+        Assertions.assertEquals(1100D, salaireAugmenté);
     }
 
 }
